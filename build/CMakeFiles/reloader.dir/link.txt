@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/reloader.dir/src/main.c.o CMakeFiles/reloader.dir/src/reloc.c.o CMakeFiles/reloader.dir/src/fftype.c.o -o reloader 
