@@ -15,6 +15,10 @@
         {
             "done": false,
             "task": "host reloader: reconstruct/find all the symbols for calling"
+        },
+        {
+            "done": false,
+            "task": "issue: paths struct not merging from recursions"
         }
     ]
 }

@@ -1,24 +1,29 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-#include "fftype.h"
-
+// single file detection
 int main(int argc, char* argv[]) {
-    // force path selection
     if (argc < 2) {
-        fprintf(stderr, "Usage: %s <src>\n", argv[0]);
+        fprintf(stdout, "Usage: %s <file>\n", argv[0]);
         return 1;
     }
 
-    Paths paths = find_file_path_wrapper("src", ".c");
-
-    while (paths.count > 0) {
-        paths.count--;
-        fprintf(stdout, "C file: %s\n", paths.paths[paths.count]);
-        free(paths.paths[paths.count]);
+    // read file binary
+    FILE* file = fopen(argv[1], "rb");
+    if (file == NULL) {
+        fprintf(stdout, "Failed opening file"); 
     }
 
-    free(paths.paths[paths.count]);
+    size_t last_size = 0;
 
+    fseek(file, 0, SEEK_END);
+    long init_size = ftell(file);
+
+    while(1) {
+
+        
+
+    }
+
+    fclose(file);
     return 0;
 }

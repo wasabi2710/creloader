@@ -57,5 +57,8 @@ CMakeFiles/reloader.dir/src/fftype.c.o: \
  /usr/include/x86_64-linux-gnu/bits/dirent_ext.h /usr/include/string.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h /home/osboxes/dev/cpp/creloader/src/fftype.h \
+ /usr/include/strings.h /usr/include/x86_64-linux-gnu/sys/stat.h \
+ /usr/include/x86_64-linux-gnu/bits/stat.h \
+ /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
+ /home/osboxes/dev/cpp/creloader/src/fftype.h \
  /home/osboxes/dev/cpp/creloader/src/reloc.h

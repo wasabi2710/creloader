@@ -6,8 +6,6 @@ typedef struct {
     int count;
 } Paths;
 
-// Paths find_file_path(const char* base, const char* fType);
-Paths find_file_path_wrapper(const char* base, const char* fType);
-void find_file_path(const char* base, const char* fType, Paths* accumulator);
+Paths find_file_path(const char* base, const char* fType);
 
 #endif
