@@ -2,23 +2,19 @@
     "tasks": [
         {
             "done": true,
-            "task": "hot reloading prototyping"
+            "task": "reloader: reload shared object files"
         },
         {
             "done": false,
-            "task": "write file changes detection in C (!shell, cross platform reasons)"
+            "task": "dir watcher lin: reimplementation using system libs instead"
         },
         {
             "done": false,
-            "task": "host reloader: accepts (relative & absolute) paths of .so"
+            "task": "reloader: symbol finder"
         },
         {
             "done": false,
-            "task": "host reloader: reconstruct/find all the symbols for calling"
-        },
-        {
-            "done": true,
-            "task": "issue: paths struct not merging from recursions"
+            "task": "host reloader: automatic object file compilation"
         }
     ]
 }
