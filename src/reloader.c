@@ -32,7 +32,7 @@ void _reloader(const char* dll_path, FuncType* func_type) {
         return;
     }
 
-    func_type->func();  // Call the function
+    func_type->func();  // call the func
 
     FreeLibrary(dll);
 }

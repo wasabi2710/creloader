@@ -15,6 +15,10 @@
         {
             "done": true,
             "task": "host reloader: automatic object file compilation"
+        },
+        {
+            "done": false,
+            "task": "object compiler: use makefile or cmake"
         }
     ]
 }

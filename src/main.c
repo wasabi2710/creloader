@@ -181,37 +181,6 @@ void _reloader_wrap(void* arg) {
     _reloader(params->obj_path, params->run_all);
 }
 
-// even trigger
-// int mfdsafsn(int argc, char* argv[]) {
-//     if (argc < 2) { 
-//         fprintf(stderr, "Usage: %s <directory_path>\n", argv[0]); 
-//         return 1;
-//     }
-
-//     char* entry = find_main_entry(argv[1]);  
-//     printf("Main entry is from %s\n", entry);
-
-//     wchar_t dirpath[MAX_PATH];
-//     MultiByteToWideChar(CP_UTF8, 0, argv[1], -1, dirpath, MAX_PATH);
-
-//     wprintf(L"Directory path: %ls\n", dirpath);
-
-//     char obj_path[MAX_PATH];
-//     _init_reloader(entry, obj_path);
-
-//     FuncType run_all = { "run_all", NULL };
-//     FuncPtr func[2] = { _obj_comp_wrap, _reloader_wrap };
-
-//     // init compilers
-//     obj_comp(entry);
-//     _reloader(obj_path, &run_all);
-
-//     // main prog
-//     watch_src_dir(dirpath, func, 2);
-
-//     return 0;
-// }
-
 int main(int argc, char* argv[]) {
     if (argc < 2) { 
         fprintf(stderr, "Usage: %s <directory_path>\n", argv[0]); 
@@ -229,8 +198,6 @@ int main(int argc, char* argv[]) {
     char obj_path[MAX_PATH];
     _init_reloader(entry, obj_path);
 
-    // Prepare arguments for each function
-    // Create structs matching what your wrappers expect
     struct {
         char* entry;
     } obj_comp_args = { entry };
@@ -240,17 +207,15 @@ int main(int argc, char* argv[]) {
         FuncType* run_all;
     } reloader_args = { obj_path, &(FuncType){ "run_all", NULL } };
 
-    // Create array of function pointers and their arguments
     FuncPtr func[2] = { _obj_comp_wrap, _reloader_wrap };
     void* args[2] = { &obj_comp_args, &reloader_args };
 
-    // Initial compilation and loading
     // obj_comp(entry);
     // _reloader(obj_path, reloader_args.run_all);
     func[0](args[0]);
     func[1](args[1]);
 
-    // Start watching with proper arguments
+    // main prog
     watch_src_dir(dirpath, func, args, 2);
 
     return 0;

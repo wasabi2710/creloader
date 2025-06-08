@@ -1,7 +1,7 @@
 #ifndef _WATCHER_H
 #define _WATCHER_H
 
-#define INITIAL_BUFFER_SIZE 65536    // 64KB
+#define INITIAL_BUFFER_SIZE 65536  // 64KB
 #define MAX_BUFFER_SIZE     (10 * 1024 * 1024)  
 #define DEBOUNCE_MS         200      
 

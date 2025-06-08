@@ -131,11 +131,9 @@ void watch_src_dir(const wchar_t* dirpath, FuncPtr func[], void* args[], int c) 
                         printf("modified\n");
                         action = L"MODIFIED"; 
                         // recall any funcptr[]
-                        
                         for (int i = 0; i < c; i++) {
                             func[i](args[i]);
                         }
-
                         break;
                     case FILE_ACTION_REMOVED: action = L"REMOVED"; break;
                     case FILE_ACTION_RENAMED_OLD_NAME: action = L"RENAMED_FROM"; break;
@@ -158,19 +156,5 @@ void watch_src_dir(const wchar_t* dirpath, FuncPtr func[], void* args[], int c) 
     CloseHandle(overlapped.hEvent);
     CloseHandle(hDir);
 }
-
-// int main(int argc, char* argv[]) {
-//     if (argc < 2) {
-//         printf("Usage: %s <directory>\n", argv[0]);
-//         return 1;
-//     }
-
-//     wchar_t dirpath[MAX_PATH];
-//     MultiByteToWideChar(CP_UTF8, 0, argv[1], -1, dirpath, MAX_PATH);
-//     watch_src_dir(dirpath);
-    
-    
-//     return 0;
-// }
 
 
