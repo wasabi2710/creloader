@@ -5,8 +5,8 @@ project(reloader)
 add_executable(
     ${PROJECT_NAME} 
     src/main.c 
-    #src/reloc.c
-    #src/fftype.c    
+    src/reloader.c
+    src/watcher.c    
 )
 
 # Make sure it links as a console app on Windows

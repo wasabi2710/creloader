@@ -1,6 +1,9 @@
 # ninja log v6
-692	790	7709772371458611	reloader.exe	f412ad8f7c10c4c5
+28	647	7710776088214626	CMakeFiles/reloader.dir/src/reloader.c.obj	be6db1792bd5216a
+612	710	7710780499718333	reloader.exe	fc44102e3d420eb8
 23	122	7708894249257215	CMakeFiles/reloader.dir/src/reloc.c.obj	623aaac26a305a3b
-24	692	7709772364769999	CMakeFiles/reloader.dir/src/main.c.obj	67677f2c0e02708e
-25	628	7709773317756298	CMakeFiles/reloader.dir/src/main.c.obj	67677f2c0e02708e
-629	724	7709773323808409	reloader.exe	f412ad8f7c10c4c5
+24	599	7710779646680796	CMakeFiles/reloader.dir/src/main.c.obj	67677f2c0e02708e
+24	611	7710780493818716	CMakeFiles/reloader.dir/src/watcher.c.obj	3e52428ea9b04fbb
+28	648	7710788262245596	CMakeFiles/reloader.dir/src/watcher.c.obj	3e52428ea9b04fbb
+25	660	7710788262245596	CMakeFiles/reloader.dir/src/main.c.obj	67677f2c0e02708e
+660	758	7710788268597025	reloader.exe	fc44102e3d420eb8

@@ -3,10 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <wchar.h>
-
-#define INITIAL_BUFFER_SIZE 65536    // Start with 64KB
-#define MAX_BUFFER_SIZE     (10 * 1024 * 1024)  // Cap at 10MB
-#define DEBOUNCE_MS         200      // Ignore rapid re-saves within 200ms
+#include "watcher.h"
 
 bool is_c_file(const wchar_t* path) {
     const wchar_t* ext = wcsrchr(path, L'.');
@@ -17,7 +14,7 @@ bool is_temp_file(const wchar_t* filename) {
     return (iswdigit(filename[0]) || filename[0] == L'~');
 }
 
-void watch_src_dir(const wchar_t* dirpath) {
+void watch_src_dir(const wchar_t* dirpath, FuncPtr func[], void* args[], int c) {
     HANDLE hDir = CreateFileW(
         dirpath,
         FILE_LIST_DIRECTORY,
@@ -121,7 +118,7 @@ void watch_src_dir(const wchar_t* dirpath) {
                 if (event->Action == FILE_ACTION_MODIFIED) {
                     if (wcscmp(last_modified_file, filepath) == 0 &&
                         (current_time - last_modified_time) < DEBOUNCE_MS) {
-                        goto next_event;  // Skip duplicate
+                        goto next_event;  // please skip duplicate
                     }
                     last_modified_time = current_time;
                     wcscpy(last_modified_file, filepath);
@@ -130,7 +127,16 @@ void watch_src_dir(const wchar_t* dirpath) {
                 const wchar_t* action = NULL;
                 switch (event->Action) {
                     case FILE_ACTION_ADDED: action = L"ADDED"; break;
-                    case FILE_ACTION_MODIFIED: action = L"MODIFIED"; break;
+                    case FILE_ACTION_MODIFIED: 
+                        printf("modified\n");
+                        action = L"MODIFIED"; 
+                        // recall any funcptr[]
+                        
+                        for (int i = 0; i < c; i++) {
+                            func[i](args[i]);
+                        }
+
+                        break;
                     case FILE_ACTION_REMOVED: action = L"REMOVED"; break;
                     case FILE_ACTION_RENAMED_OLD_NAME: action = L"RENAMED_FROM"; break;
                     case FILE_ACTION_RENAMED_NEW_NAME: action = L"RENAMED_TO"; break;
@@ -153,17 +159,18 @@ void watch_src_dir(const wchar_t* dirpath) {
     CloseHandle(hDir);
 }
 
-int main(int argc, char* argv[]) {
-    if (argc < 2) {
-        printf("Usage: %s <directory>\n", argv[0]);
-        return 1;
-    }
+// int main(int argc, char* argv[]) {
+//     if (argc < 2) {
+//         printf("Usage: %s <directory>\n", argv[0]);
+//         return 1;
+//     }
 
-    wchar_t dirpath[MAX_PATH];
-    MultiByteToWideChar(CP_UTF8, 0, argv[1], -1, dirpath, MAX_PATH);
-
-    watch_src_dir(dirpath);
-    return 0;
-}
+//     wchar_t dirpath[MAX_PATH];
+//     MultiByteToWideChar(CP_UTF8, 0, argv[1], -1, dirpath, MAX_PATH);
+//     watch_src_dir(dirpath);
+    
+    
+//     return 0;
+// }
 
 

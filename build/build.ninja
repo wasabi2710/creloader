@@ -49,6 +49,16 @@ build CMakeFiles/reloader.dir/src/main.c.obj: C_COMPILER__reloader_unscanned_ C$
   OBJECT_DIR = CMakeFiles\reloader.dir
   OBJECT_FILE_DIR = CMakeFiles\reloader.dir\src
 
+build CMakeFiles/reloader.dir/src/reloader.c.obj: C_COMPILER__reloader_unscanned_ C$:/Users/Administrator/Documents/DEV/cpp/creloader/src/reloader.c || cmake_object_order_depends_target_reloader
+  DEP_FILE = CMakeFiles\reloader.dir\src\reloader.c.obj.d
+  OBJECT_DIR = CMakeFiles\reloader.dir
+  OBJECT_FILE_DIR = CMakeFiles\reloader.dir\src
+
+build CMakeFiles/reloader.dir/src/watcher.c.obj: C_COMPILER__reloader_unscanned_ C$:/Users/Administrator/Documents/DEV/cpp/creloader/src/watcher.c || cmake_object_order_depends_target_reloader
+  DEP_FILE = CMakeFiles\reloader.dir\src\watcher.c.obj.d
+  OBJECT_DIR = CMakeFiles\reloader.dir
+  OBJECT_FILE_DIR = CMakeFiles\reloader.dir\src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target reloader
@@ -57,7 +67,7 @@ build CMakeFiles/reloader.dir/src/main.c.obj: C_COMPILER__reloader_unscanned_ C$
 #############################################
 # Link the executable reloader.exe
 
-build reloader.exe: C_EXECUTABLE_LINKER__reloader_ CMakeFiles/reloader.dir/src/main.c.obj
+build reloader.exe: C_EXECUTABLE_LINKER__reloader_ CMakeFiles/reloader.dir/src/main.c.obj CMakeFiles/reloader.dir/src/reloader.c.obj CMakeFiles/reloader.dir/src/watcher.c.obj
   LINK_FLAGS = -mconsole
   LINK_LIBRARIES = -lkernel32  -luser32  -lgdi32  -lwinspool  -lshell32  -lole32  -loleaut32  -luuid  -lcomdlg32  -ladvapi32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\reloader.dir
