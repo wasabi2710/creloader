@@ -5,15 +5,15 @@
             "task": "reloader: reload shared object files"
         },
         {
-            "done": false,
+            "done": true,
             "task": "dir watcher lin: reimplementation using system libs instead"
         },
         {
-            "done": false,
+            "done": true,
             "task": "reloader: symbol finder"
         },
         {
-            "done": false,
+            "done": true,
             "task": "host reloader: automatic object file compilation"
         }
     ]
