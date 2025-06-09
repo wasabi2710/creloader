@@ -1,0 +1,37 @@
+Producer-Consumer Pattern Summary
+
+-----------------------------------
+
+What is it?
+-----------
+The Producer-Consumer pattern is a concurrency design pattern where:
+
+- Producer(s) generate or detect events/data and push them into a shared queue or buffer.
+- Consumer(s) retrieve and process events/data from the queue asynchronously.
+
+The queue decouples producers and consumers, allowing them to operate at different speeds without blocking each other.
+
+Why use it?
+-----------
+- Separates event detection from event processing.
+- Enables asynchronous and concurrent processing.
+- Improves responsiveness and performance.
+- Prevents blocking between producers and consumers.
+
+Key Components
+--------------
+1. Producer: Detects or creates events and enqueues them.
+2. Queue/Buffer: Thread-safe data structure that stores events temporarily.
+3. Consumer: Processes events dequeued from the buffer.
+
+Related Concepts
+----------------
+- Event Queueing
+- Message Passing
+- Asynchronous Event Processing
+- Thread-safe Queue
+
+Summary
+-------
+This pattern is ideal for scenarios like file change monitoring where events are detected (producer) and processed later (consumer), ensuring smooth, non-blocking workflows.
+

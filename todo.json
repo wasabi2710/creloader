@@ -19,6 +19,10 @@
         {
             "done": false,
             "task": "object compiler: use makefile or cmake"
+        },
+        {
+            "done": false,
+            "task": "refactoring: rewrite everything for POSIX Comp"
         }
     ]
 }
