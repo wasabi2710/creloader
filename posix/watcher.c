@@ -1,4 +1,8 @@
 #include "watcher.h"
+#include "processor.h"
+#include "reloader.h"
+#include <dirent.h>
+#include <stdio.h>
 // func: add cmakelists mon
 void add_cmon(const char *src_dir, int notifd) {
     // assume cmakelists: CMakeLists.txt//src_dir
@@ -131,6 +135,14 @@ void process_mon_events(int notifd, const char* src_dir) {
     }
 }
 
+void init(const char* base_path) {
+    fprintf(stdout, "\n=== Initializing Cmake Build ===\n");
+    process_cmake(base_path, 1);
+    const char* sofile = find_sofile(base_path);
+    reloader(find_sofile(base_path));
+    fprintf(stdout, "\n=== Initializing Cmake Build ===\n\n");
+}
+
 // func: call mon_dir on base_path & recursively apply calling of mon_dir to subdirs
 void src_watcher(const char *base_path) {
     // init notifd
@@ -140,8 +152,8 @@ void src_watcher(const char *base_path) {
         return;
     }
 
-    // if no build
-    
+    // init
+    init(base_path);
 
     // recursively add all watches
     add_mon(base_path, notifd);
