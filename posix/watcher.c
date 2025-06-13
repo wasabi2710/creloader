@@ -1,16 +1,22 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <dirent.h>
-#include <sys/types.h>
-#include <sys/inotify.h>
-#include <unistd.h>
-#include <limits.h>
-#include <sys/stat.h>
+#include "watcher.h"
+// func: add cmakelists mon
+void add_cmon(const char *src_dir, int notifd) {
+    // assume cmakelists: CMakeLists.txt//src_dir
+    char path_cpy[PATH_MAX];
+    strncpy(path_cpy, src_dir, sizeof(path_cpy) - 1);
 
-int is_cfile(const char *filename) {
-    const char *dot = strrchr(filename, '.');
-    return dot && strcmp(dot, ".c") == 0;
+    char *build_path = dirname(path_cpy);
+
+    //cmakelists.txt
+    char cmake_path[PATH_MAX];
+    snprintf(cmake_path, PATH_MAX, "%s/%s", build_path, "CMakeLists.txt");
+
+    fprintf(stdout, "MON_DIR: Cmake watching %s\n", cmake_path);
+    int wd = inotify_add_watch(notifd, cmake_path, IN_MODIFY);
+    if (wd == -1) {
+        fprintf(stderr, "MON_DIR: failed add_watch to CmakeList\n");
+        return;
+    }
 }
 
 // func: recursively add watch to all dirs
@@ -54,10 +60,44 @@ void add_mon(const char *src_dir, int notifd) {
     closedir(dirstream);
 }
 
+// c & cmake guard
+int is_cfile(const char *filename) {
+    const char *dot = strrchr(filename, '.');
+    if (!dot) return 0;  
+    return (strcmp(dot, ".c")) == 0 || (strcmp(dot, ".h") == 0);
+}
+
+int is_bpath(const char* base_path, const char* filename) {
+    char tmp[PATH_MAX];
+    strncpy(tmp, base_path, sizeof(tmp));
+    tmp[sizeof(tmp)-1] = '\0';  
+
+    char* last_slash = strrchr(tmp, '/');
+    if (last_slash != NULL) {
+        *last_slash = '\0';
+    }
+
+    printf("BPATH: tmp path %s\n", tmp);
+
+    return (strcmp(tmp, filename) == 0);
+}
+
+unsigned long now_ms() {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return tv.tv_sec * 1000UL + tv.tv_usec / 1000;
+}
+
 // func: process mon events
-void process_mon_events(int notifd, char* src_dir) {
+void process_mon_events(int notifd, const char* src_dir) {
     char buf[4096];
+
+    unsigned long last = 0;
+    int debounce_time = 4000; // 3 seconds
+
     while (1) {
+        unsigned long current = now_ms();
+
         ssize_t br = read(notifd, buf, sizeof(buf));
         if (br == -1) {
             fprintf(stderr, "MON_DIR: failed reading notify buffer\n");
@@ -67,9 +107,23 @@ void process_mon_events(int notifd, char* src_dir) {
         for (char *ptr = buf; ptr < buf + br; ) {
             struct inotify_event *event = (struct inotify_event *)ptr;
 
-            if ((event->mask & IN_MODIFY) && is_cfile(event->name)) {
-                fprintf(stdout, "File modified: %s\n", event->name);
-                // reserve: for calling reloader and obj comp
+            if ((event->mask & IN_MODIFY) && ((current - last) >= debounce_time)) {
+                printf("Event name: %s\n", event->name);
+                if (is_cfile(event->name)) {
+                    fprintf(stdout, "\n===== C File modified: %s =====\n", event->name);
+                    process_cmake(src_dir, 0);
+                } else {
+                    fprintf(stdout, "\n===== CMakeLists modified =====\n");
+                    process_cmake(src_dir, 1);
+                }
+
+                last = current;
+
+                // find_sofile and reload
+                const char* sofile = find_sofile(src_dir);
+                reloader(find_sofile(src_dir));
+
+                usleep(10000); // await 10ms
             }
 
             ptr += sizeof(struct inotify_event) + event->len;
@@ -86,13 +140,16 @@ void src_watcher(const char *base_path) {
         return;
     }
 
+    // if no build
+    
+
     // recursively add all watches
     add_mon(base_path, notifd);
+    add_cmon(base_path, notifd);
 
     // process events
     process_mon_events(notifd, (char*)base_path);
 
     // cleanup
     close(notifd);
-
 }

@@ -17,12 +17,16 @@
             "task": "host reloader: automatic object file compilation"
         },
         {
-            "done": false,
+            "done": true,
             "task": "object compiler: use makefile or cmake"
         },
         {
-            "done": false,
+            "done": true,
             "task": "refactoring: rewrite everything for POSIX Comp"
+        },
+        {
+            "done": false,
+            "task": "finalized: combine both posix and winds"
         }
     ]
 }

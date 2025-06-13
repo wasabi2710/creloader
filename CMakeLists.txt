@@ -2,6 +2,7 @@
 cmake_minimum_required(VERSION 3.25)
 project(reloader)
 
+# commentsafsasf
 # winds only
 if (WIN32)
 add_executable(
@@ -14,8 +15,9 @@ elseif(UNIX)
 add_executable(
     ${PROJECT_NAME} 
     posix/main.c 
-    #posix/reloader.c
-    posix/watcher.c    
+    posix/reloader.c
+    posix/watcher.c 
+    posix/processor.c   
 )
 endif()
 
