@@ -2,14 +2,13 @@
 cmake_minimum_required(VERSION 3.25)
 project(reloader)
 
-# commentsafsasf
-# winds only
 if (WIN32)
 add_executable(
     ${PROJECT_NAME} 
-    src/main.c 
-    src/reloader.c
-    src/watcher.c    
+    windows/main.c 
+    windows/reloader.c
+    windows/watcher.c  
+    windows/processor.c  
 )
 elseif(UNIX)
 add_executable(

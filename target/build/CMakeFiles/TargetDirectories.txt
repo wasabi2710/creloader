@@ -1,3 +1,3 @@
-/home/wasabi/Documents/dev/builds/creloader/target/build/CMakeFiles/test.dir
-/home/wasabi/Documents/dev/builds/creloader/target/build/CMakeFiles/edit_cache.dir
-/home/wasabi/Documents/dev/builds/creloader/target/build/CMakeFiles/rebuild_cache.dir
+C:/Users/Administrator/Documents/DEV/cpp/creloader/target/build/CMakeFiles/test.dir
+C:/Users/Administrator/Documents/DEV/cpp/creloader/target/build/CMakeFiles/edit_cache.dir
+C:/Users/Administrator/Documents/DEV/cpp/creloader/target/build/CMakeFiles/rebuild_cache.dir
