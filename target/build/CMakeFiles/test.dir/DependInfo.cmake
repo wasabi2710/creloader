@@ -8,11 +8,16 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/osboxes/dev/cpp/c/creloader/target/src/main.c" "CMakeFiles/test.dir/src/main.c.o" "gcc" "CMakeFiles/test.dir/src/main.c.o.d"
+  "/home/wasabi/Documents/dev/builds/creloader/target/src/main.c" "CMakeFiles/test.dir/src/main.c.o" "gcc" "CMakeFiles/test.dir/src/main.c.o.d"
+  "" "libtest.so" "gcc" "CMakeFiles/test.dir/link.d"
   )
 
-# Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.

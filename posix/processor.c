@@ -1,13 +1,6 @@
 #include "processor.h"
-#include <linux/limits.h>
-#include <errno.h>
-#include <string.h>
-#include <time.h>
 
-// using cmake only
-// !cmake must compile a shared object
 void process_cmake(const char* src_dir, int rebuild) {
-    // tmp returns 1 lvl dir above
     char tmp[PATH_MAX];
     strncpy(tmp, src_dir, sizeof(tmp));
     tmp[sizeof(tmp)-1] = '\0';
@@ -37,10 +30,7 @@ void process_cmake(const char* src_dir, int rebuild) {
     }
 }
 
-// find sofile
-// dependee: reloader(char* sofile)
 char* find_sofile(const char* src_dir) {    
-    // tmp returns above lvl dir
     char tmp[PATH_MAX];
     strncpy(tmp, src_dir, sizeof(tmp));
     tmp[sizeof(tmp)-1] = '\0';

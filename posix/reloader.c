@@ -1,8 +1,7 @@
 #include "reloader.h"
-#include <dlfcn.h>
 
 void reloader(const char* sofile) {
-    printf("\n===== Reloading =====\n");
+    printf("\n=== Reloading ===\n");
 
     void* genhand;
     genhand = dlopen(sofile, RTLD_NOW);
@@ -18,6 +17,5 @@ void reloader(const char* sofile) {
     }  
 
     run_all();
-
     dlclose(genhand);
 }

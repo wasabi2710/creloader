@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/wasabi/Documents/dev/builds/creloader/target/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
