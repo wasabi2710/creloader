@@ -1,6 +1,6 @@
 ## C Hot Reloading
 
-My personal on C Hot Reloading.
+My personal take on C Hot Reloading.
 
 ## Installation
 
